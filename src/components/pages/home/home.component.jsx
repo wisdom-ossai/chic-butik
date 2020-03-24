@@ -1,6 +1,6 @@
 import React from 'react';
 import './home.component.scss';
-import DirectoryComponent from '../dirctory/directory.component';
+import DirectoryComponent from '../../dirctory/directory.component';
 
 const HomeComponent = () => (
     <div className="Home">

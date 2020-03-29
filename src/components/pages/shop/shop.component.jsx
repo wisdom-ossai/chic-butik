@@ -13,7 +13,11 @@ export class ShopComponent extends React.Component {
     }
 
     componentDidMount() {
-        this.setState({collections: SHOP_DATA})
+        this.setState(prevState => {
+            return {
+                collections: SHOP_DATA
+            }
+        })
     }
 
     render() {

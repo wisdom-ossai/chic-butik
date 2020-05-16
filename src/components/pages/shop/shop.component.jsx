@@ -13,7 +13,7 @@ export class ShopComponent extends React.Component {
     }
 
     componentDidMount() {
-        this.setState(prevState => {
+        this.setState(() => {
             return {
                 collections: SHOP_DATA
             }

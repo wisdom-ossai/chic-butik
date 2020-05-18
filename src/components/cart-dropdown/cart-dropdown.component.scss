@@ -21,6 +21,14 @@
     button {
         margin-top: auto;
     }
+
+    .no-item-text {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        margin: auto;
+    }
 }
 
 .cartDropdown::-webkit-scrollbar {

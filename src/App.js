@@ -5,6 +5,7 @@ import { Route, Switch } from 'react-router-dom';
 import { ShopComponent } from './components/pages/shop/shop.component';
 import HeaderComponent from './components/header/header.component';
 import AuthenticationComponent from './components/pages/authentication/authentication.component';
+import CheckoutComponent from './components/pages/checkout/checkout.component';
 
 
 const App = () => (
@@ -13,6 +14,7 @@ const App = () => (
         <Switch>
           <Route exact path="/" component={HomeComponent} />
           <Route path="/shop" component={ShopComponent} />
+          <Route exact path="/checkout" component={CheckoutComponent} />
           <Route exact path="/signin" component={AuthenticationComponent} />
         </Switch>
       </div>

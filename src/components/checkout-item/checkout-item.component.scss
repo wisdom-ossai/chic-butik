@@ -6,7 +6,7 @@
     padding: 15px 0;
     font-size: 20px;
     align-items: center;
-    
+
     .img-container {
         width: 23%;
         padding-right: 15px;
@@ -20,5 +20,24 @@
     .quantity,
     .price {
         width: 23%;
+    }
+
+    .remove {
+        cursor: pointer;
+        color: red;
+    }
+
+    .quantity {
+        display: flex;
+        justify-content: stretch;
+        align-items: center;
+        .plus, .minus {
+            margin: 8px;
+            padding: 0 8px;
+            font-size: 25px;
+            box-shadow: 0px -1px 10px -5px #4d4d4d;
+            border-radius: 50%;
+            cursor: pointer;
+        }
     }
 }

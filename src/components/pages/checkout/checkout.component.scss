@@ -29,4 +29,21 @@
         margin-left: auto;
         font-size: 36px;
     }
+
+    .test-message {
+        color: red;
+        margin-right: auto;
+        margin-top: 14px;
+        // font-size: 24px;
+        padding: 0;
+        margin: 1px dotted red;
+        .p {
+            margin: 0;
+            padding: 0;
+        }
+    }
+
+    .pay-button {
+        margin-left: auto;
+    }
 }

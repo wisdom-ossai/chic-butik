@@ -4,7 +4,6 @@ import { DirectoryActionTypes } from './directory.actions';
 const directoryReducer = (state = InitialDirectoryState, action) => {
     switch (action.type) {
         case DirectoryActionTypes.GET_DIRECTORY_DATA:
-            console.log('action fired')
             return {
                 ...state,
                 data: action.payload

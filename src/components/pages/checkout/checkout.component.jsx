@@ -34,7 +34,7 @@ const CheckoutComponent = ({cartItems, totalPrice}) => (
             <p>*Please use the details below to test payment</p>
             <div>
                 <p>card number: 4242 4242 4242 4242</p>
-                <p>Expiry: 01/20</p>
+                <p>Expiry: 01/22</p>
                 <p>CVV: 123</p>
             </div>
         </div>

@@ -1,11 +1,11 @@
 import React from 'react';
-import './home.component.scss';
 import DirectoryComponent from '../../dirctory/directory.component';
+import { HomeContainer } from './home.styled';
 
 const HomeComponent = () => (
-    <div className="Home">
+    <HomeContainer>
         <DirectoryComponent />
-    </div>
+    </HomeContainer>
 );
 
 export default HomeComponent;

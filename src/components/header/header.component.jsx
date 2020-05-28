@@ -6,7 +6,7 @@ import CartIconComponent from '../cart-icon/cart-icon.component';
 import CartDropdownComponent from '../cart-dropdown/cart-dropdown.component';
 import { getCurrentUser } from '../../store/user/user.selectors';
 import { showCartContainer } from '../../store/cart/cart.selectors';
-import { HeaderContainer, LogoContainer, OptionsContainer, OptionLink, OptionDiv } from './header.styled';
+import { HeaderContainer, LogoContainer, OptionsContainer, OptionLink } from './header.styled';
 
 const HeaderComponent = ({ currentUser, showCart }) => (
   <HeaderContainer>
@@ -21,9 +21,9 @@ const HeaderComponent = ({ currentUser, showCart }) => (
         CONTACT
       </OptionLink>
       {currentUser ? (
-        <OptionDiv onClick={() => auth.signOut()}>
+        <OptionLink as='div' onClick={() => auth.signOut()}>
           SIGN OUT
-        </OptionDiv>
+        </OptionLink>
       ) : (
         <OptionLink to="/sign-in">
           SIGN IN

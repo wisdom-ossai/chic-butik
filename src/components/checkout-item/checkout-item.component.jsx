@@ -1,24 +1,24 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import './checkout-item.component.scss';
 import { RemoveItemFromCart, DecreaseCartItemQuantity, AddItem } from '../../store/cart/cart.actions';
+import { ItemContainer, ImageColumn, NameColumn, QuantityColumn, PriceColumn, RemoveButton, ChangeQuantity } from './checkout-item.styled';
 
 const CheckoutItemComponent = ({item, removeItem, decrement, addItem}) => {
     const { id, imageUrl, name, quantity, price } = item;
     return (
-    <div className="checkoutItem">
-        <div className="img-container">
+    <ItemContainer>
+        <ImageColumn>
             <img src={imageUrl} alt={`${name} to pay for`} />
-        </div>
-        <div className="name">{name}</div>
-            <div className="quantity">
-                <div className="minus" onClick={() => decrement(item)}>-</div>
-                <span>{quantity}</span>
-                <div className="plus" onClick={() => addItem(item)}>+</div>
-            </div>
-        <div className="price">{price}</div>
-        <div className="remove" onClick={() => removeItem(id)}>&#10005;</div>
-    </div>
+        </ImageColumn>
+        <NameColumn>{name}</NameColumn>
+        <QuantityColumn>
+            <ChangeQuantity onClick={() => decrement(item)}>-</ChangeQuantity>
+            <span>{quantity}</span>
+            <ChangeQuantity onClick={() => addItem(item)}>+</ChangeQuantity>
+        </QuantityColumn>
+        <PriceColumn>{price}</PriceColumn>
+        <RemoveButton onClick={() => removeItem(id)}>&#10005;</RemoveButton>
+    </ItemContainer>
 )};
 
 const mapDispatchToProps = dispatch => ({

@@ -7,17 +7,25 @@ import ShopComponent from './components/pages/shop/shop.component';
 import HeaderComponent from './components/header/header.component';
 import AuthenticationComponent from './components/pages/authentication/authentication.component';
 import CheckoutComponent from './components/pages/checkout/checkout.component';
-import { addCollectionAndDocuments } from './firebase/firebase.utils';
 import { getCollectionsForPreview } from './store/shop/shop.selectors';
 import { connect } from 'react-redux';
+import { firestore, convertCollectionsSnapshotToMap } from './firebase/firebase.utils'
+import { SetShopData } from './store/shop/shop.actions';
 
 
 class App extends React.Component {
 
+  getCollectionsFromFirebase = () => {
+    const collectionRef = firestore.collection('collections');
+
+    collectionRef.onSnapshot(async snapshot => {
+      const collectionsMap = convertCollectionsSnapshotToMap(snapshot);
+      this.props.dispatch(SetShopData(collectionsMap));
+    });
+  }
+
   componentDidMount() {
-    console.log('component mounted')
-    const data = this.props.documentToFirebase.map(({title, items}) => ({title, items}))
-    addCollectionAndDocuments('collections', data);
+    this.getCollectionsFromFirebase();
   }
 
   render = () => {

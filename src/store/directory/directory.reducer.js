@@ -8,6 +8,11 @@ const directoryReducer = (state = InitialDirectoryState, action) => {
                 ...state,
                 data: action.payload
             }
+        case DirectoryActionTypes.LOADING_DIRECTORY_DATA:
+            return {
+                ...state,
+                isLoading: action.payload
+            }
     
         default:
             return state;

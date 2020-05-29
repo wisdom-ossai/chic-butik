@@ -7,25 +7,19 @@ import ShopComponent from './components/pages/shop/shop.component';
 import HeaderComponent from './components/header/header.component';
 import AuthenticationComponent from './components/pages/authentication/authentication.component';
 import CheckoutComponent from './components/pages/checkout/checkout.component';
-import { getCollectionsForPreview } from './store/shop/shop.selectors';
+import { getCollectionsForPreview, isDataLoading } from './store/shop/shop.selectors';
 import { connect } from 'react-redux';
-import { firestore, convertCollectionsSnapshotToMap } from './firebase/firebase.utils'
-import { SetShopData } from './store/shop/shop.actions';
+import { getDirectoryData } from './store/directory/directory.selectors';
 
 
 class App extends React.Component {
 
-  getCollectionsFromFirebase = () => {
-    const collectionRef = firestore.collection('collections');
-
-    collectionRef.onSnapshot(async snapshot => {
-      const collectionsMap = convertCollectionsSnapshotToMap(snapshot);
-      this.props.dispatch(SetShopData(collectionsMap));
-    });
-  }
+  
 
   componentDidMount() {
-    this.getCollectionsFromFirebase();
+    // this.getCollectionsFromFirebase();
+    
+
   }
 
   render = () => {
@@ -44,7 +38,9 @@ class App extends React.Component {
 }
 
 const mapStateToProps = createStructuredSelector({
-  documentToFirebase: getCollectionsForPreview
+  documentToFirebase: getCollectionsForPreview,
+  directorydocumentsToFirebase: getDirectoryData,
+  dataLoading: isDataLoading
 })
 
 export default connect(mapStateToProps)(App);

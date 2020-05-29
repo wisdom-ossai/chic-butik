@@ -8,12 +8,20 @@ export const getShopData = createSelector(
     shop => shop.data
 );
 
+export const isDataLoading = createSelector(
+    getShopStore,
+    shop => shop.isLoading
+);
+
 export const getCollectionsForPreview = createSelector(
     getShopData,
-    collections => Object.keys(collections).map(key => collections[key])
+    collections => {
+        console.log('collections', collections)
+        return collections ? Object.keys(collections).map(key => collections[key]) : []
+    }
 )
 
 export const getCollection = urlParam => createSelector(
     getShopData,
-    collections => collections[urlParam]
+    collections => collections ? collections[urlParam] : []
 )

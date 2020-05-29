@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import { Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
-import Loader from 'react-loader-spinner';
 import './index.css';
 import App from './App';
 import { store, persistor} from './store/root/root.store';
@@ -11,11 +10,38 @@ import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 import { setCurrentUser } from './store/user/user.actions';
 import { LoadDirectoryData } from './store/directory/directory.actions';
 import { createBrowserHistory } from 'history';
-import DIRECTORY_DATA from './components/dirctory/directory.data';
+import PageLoader from './components/page-loader/page-loader.component';
+import { LoadingShopData, SetShopData } from './store/shop/shop.actions';
+import { LoadingDirectoryData } from './store/directory/directory.actions';
+import { firestore, convertCollectionsSnapshotToMap, convertDirectoriesSnapshotToMap } from './firebase/firebase.utils';
 
 let hasRendered = false;
 const history = createBrowserHistory()
 
+
+const getCollectionsFromFirebase = () => {
+  const collectionRef = firestore.collection('collections');
+  const directoryRef = firestore.collection('directories');
+
+
+  collectionRef.onSnapshot(async snapshot => {
+    const collectionsMap = await convertCollectionsSnapshotToMap(snapshot);
+    await store.dispatch(SetShopData(collectionsMap));
+    await store.dispatch(LoadingShopData(false))
+  });
+
+  directoryRef.onSnapshot(async snapshot => {
+    const directoriesMap = await convertDirectoriesSnapshotToMap(snapshot);
+    await store.dispatch(LoadDirectoryData(directoriesMap));
+    await store.dispatch(LoadingDirectoryData(false))
+  });
+}
+
+const storeDispatches = (user) => {
+  store.dispatch(setCurrentUser(user));
+  store.dispatch(LoadingShopData(true));
+  store.dispatch(LoadingDirectoryData(true));
+}
 
 const AppContainer = (
   <Provider store={store}>
@@ -27,18 +53,6 @@ const AppContainer = (
   </Provider>
 );
 
-const PageLoader = (
-  <div className="pageLoader">
-    <Loader
-      type="Circles"
-      color="#1b1b1b"
-      height={150}
-      width={150}
-      timeout={2000} //3 secs
-    />
-  </div>
-);
-
 const renderApp = () => {
   if (!hasRendered) {
     ReactDOM.render(AppContainer, document.getElementById('root'));
@@ -46,7 +60,7 @@ const renderApp = () => {
   }
 }
 
-ReactDOM.render(PageLoader, document.getElementById('root'));
+ReactDOM.render(<PageLoader />, document.getElementById('root'));
 
 auth.onAuthStateChanged(async userAuth => {
   if (userAuth) {
@@ -56,8 +70,8 @@ auth.onAuthStateChanged(async userAuth => {
         id: snapshot.id,
         ...snapshot.data()
       };
-      store.dispatch(setCurrentUser(user));
-      store.dispatch(LoadDirectoryData(DIRECTORY_DATA))
+      storeDispatches(user);
+      getCollectionsFromFirebase();
       renderApp();
       if (history.location.pathname === '/signin') {
         history.push('/')

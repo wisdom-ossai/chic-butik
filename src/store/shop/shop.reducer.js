@@ -8,6 +8,12 @@ export const shopReducer = (state = InitialShopState, action) => {
                 ...state,
                 data: action.payload
             }
+        
+        case ShopActionTypes.LOADING_DATA:
+            return {
+                ...state,
+                isLoading: action.payload
+            }
         default:
             return state;
     }

@@ -1,6 +1,7 @@
 
 const InitialDirectoryState = {
-    data: []
+    data: [],
+    isLoading: false
 };
 
 export default InitialDirectoryState;

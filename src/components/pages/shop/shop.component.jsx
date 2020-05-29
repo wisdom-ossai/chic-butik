@@ -21,11 +21,11 @@ class ShopComponent extends React.Component {
     }
 
     render() {
-        const { match, dataLoading } = this.props
+        const { match, dataLoading, dataLoaded } = this.props
         return (
             <div className="Shop">
-                <Route exact path={`${match.path}`} render={(props) => <CollectionsOverviewComponentWithLoader isLoading={dataLoading} {...props} />} />
-                <Route path={`${match.path}/:collectionId`} render={(props) => <CollectionComponentWithLoader isLoading={!isShopDataLoaded} {...props} />} />
+                <Route exact path={`${match.path}`} render={(props) => <CollectionsOverviewComponentWithLoader isLoading={!dataLoading} {...props} />} />
+                <Route path={`${match.path}/:collectionId`} render={(props) => <CollectionComponentWithLoader isLoading={!dataLoaded} {...props} />} />
             </div>
         )
     }
@@ -33,6 +33,7 @@ class ShopComponent extends React.Component {
 
 
 const mapStateToProps = createStructuredSelector({
+    dataLoaded: isShopDataLoaded,
     dataLoading: isDataLoading
 })
 

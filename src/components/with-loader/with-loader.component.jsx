@@ -6,7 +6,7 @@ const WithLoaderHOC = WrappedComponent => {
         return isLoading ? (
             <PageLoader />
         ) : (
-                <WrappedComponent {...otherProps} />
+            <WrappedComponent {...otherProps} />
         );
     };
 

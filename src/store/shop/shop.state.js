@@ -1,6 +1,6 @@
 
 export const InitialShopState = {
-    data: [],
+    data: null,
     isLoading: false,
     errorMessage: ''
 }

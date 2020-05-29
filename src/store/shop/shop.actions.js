@@ -25,9 +25,11 @@ export const StartFetchShopData = () => {
         dispatch(SetShopData());
         const collectionRef = firestore.collection('collections');
 
-        collectionRef.get().then(snapshot => {
+        collectionRef.get()
+            .then(snapshot => {
             const collectionsMap = convertCollectionsSnapshotToMap(snapshot);
             dispatch(SetShopDataSuccess(collectionsMap));
-        }).catch(e => dispatch(SetShopDataFailure(e.massage)));
+            })
+            .catch(e => dispatch(SetShopDataFailure(e.massage)));
     }
 }

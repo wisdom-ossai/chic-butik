@@ -13,6 +13,11 @@ export const isDataLoading = createSelector(
     shop => shop.isLoading
 );
 
+export const getErrorMessage = createSelector(
+    getShopStore,
+    shop => shop.errorMessage
+);
+
 export const getCollectionsForPreview = createSelector(
     getShopData,
     collections => {
@@ -24,4 +29,9 @@ export const getCollectionsForPreview = createSelector(
 export const getCollection = urlParam => createSelector(
     getShopData,
     collections => collections ? collections[urlParam] : []
+)
+
+export const isShopDataLoaded = createSelector(
+    getShopStore,
+    shop => !!shop.data
 )

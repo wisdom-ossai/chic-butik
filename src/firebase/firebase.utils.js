@@ -76,9 +76,9 @@ export const convertDirectoriesSnapshotToMap = directoriesSnapshot => {
             linkUrl
         }
     });
-    console.log(transformedDirectory);
     return transformedDirectory;
-}
+};
+
 firebase.initializeApp(config);
 const auth = firebase.auth();
 const firestore = firebase.firestore();

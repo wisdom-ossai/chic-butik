@@ -8,6 +8,11 @@ export const getDirectoryData = createSelector(
     directory => directory.data
 )
 
+export const getErrorMessageDirectoryData = createSelector(
+    getDirectoryState,
+    directory => directory.errorMessage
+)
+
 export const isDirectoryDataLoading = createSelector(
     getDirectoryState,
     directory => directory.isLoading

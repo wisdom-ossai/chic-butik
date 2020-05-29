@@ -6,13 +6,21 @@ export const shopReducer = (state = InitialShopState, action) => {
         case ShopActionTypes.GET_SHOP_DATA:
             return {
                 ...state,
+                isLoading: true
+            }
+        
+        case ShopActionTypes.GET_SHOP_DATA_SUCCESS:
+            return {
+                ...state,
+                isLoading: false,
                 data: action.payload
             }
         
-        case ShopActionTypes.LOADING_DATA:
+        case ShopActionTypes.GET_SHOP_DATA_FAILURE:
             return {
                 ...state,
-                isLoading: action.payload
+                isLoading: false,
+                errorMessage: action.payload
             }
         default:
             return state;

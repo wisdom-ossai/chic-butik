@@ -5,21 +5,30 @@ import CollectionsOverviewComponent from '../../collections-overview/collections
 import { Route } from 'react-router-dom';
 import CollectionComponent from '../collection/collection.component';
 import { createStructuredSelector } from 'reselect';
-import { isDataLoading } from '../../../store/shop/shop.selectors';
+import { isDataLoading, isShopDataLoaded } from '../../../store/shop/shop.selectors';
 import WithLoaderHOC from '../../with-loader/with-loader.component';
+import { StartFetchShopData } from '../../../store/shop/shop.actions';
 
 
 
 const CollectionComponentWithLoader = WithLoaderHOC(CollectionComponent);
 const CollectionsOverviewComponentWithLoader = WithLoaderHOC(CollectionsOverviewComponent);
 
-const ShopComponent = ({match, dataLoading}) => {
-    return (
-        <div className="Shop">
-            <Route exact path={`${match.path}`} render={(props) => <CollectionsOverviewComponentWithLoader isLoading={dataLoading} {...props} />} />
-            <Route path={`${match.path}/:collectionId`} render={(props) => <CollectionComponentWithLoader isLoading={dataLoading} {...props}/>} />
-        </div>
-    )
+class ShopComponent extends React.Component {
+
+    componentDidMount() {
+        this.props.dispatch(StartFetchShopData());
+    }
+
+    render() {
+        const { match, dataLoading } = this.props
+        return (
+            <div className="Shop">
+                <Route exact path={`${match.path}`} render={(props) => <CollectionsOverviewComponentWithLoader isLoading={dataLoading} {...props} />} />
+                <Route path={`${match.path}/:collectionId`} render={(props) => <CollectionComponentWithLoader isLoading={!isShopDataLoaded} {...props} />} />
+            </div>
+        )
+    }
 };
 
 

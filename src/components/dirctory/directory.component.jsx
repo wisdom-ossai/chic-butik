@@ -4,18 +4,26 @@ import './directory.component.scss';
 import MenuItemComponent from '../menu-item/menu-item.component';
 import { createStructuredSelector } from 'reselect';
 import { getDirectoryData } from '../../store/directory/directory.selectors';
+import { StartFetchDirectoryData } from '../../store/directory/directory.actions';
 
-const DirectoryComponent = ({sectionList}) => {
+class DirectoryComponent extends React.Component {
 
-        return (
-          <div className="directory-menu">
-            {
-              sectionList.map(({id, ...otherProps}) => (
-              <MenuItemComponent key={id} {...otherProps} />
-              ))
-            }
-          </div>
-        );
+  componentDidMount() {
+    this.props.dispatch(StartFetchDirectoryData());
+  }
+
+  render() {
+    const { sectionList } = this.props;
+    return (
+      <div className="directory-menu">
+        {
+          sectionList.map(({ id, ...otherProps }) => (
+            <MenuItemComponent key={id} {...otherProps} />
+          ))
+        }
+      </div>
+    );
+  }
 }
 
 const mapStateToProps = createStructuredSelector({

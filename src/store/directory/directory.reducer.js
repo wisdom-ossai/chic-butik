@@ -6,14 +6,20 @@ const directoryReducer = (state = InitialDirectoryState, action) => {
         case DirectoryActionTypes.GET_DIRECTORY_DATA:
             return {
                 ...state,
-                data: action.payload
+                isLoading: true
             }
-        case DirectoryActionTypes.LOADING_DIRECTORY_DATA:
+        case DirectoryActionTypes.GET_DIRECTORY_DATA_SUCCESS:
             return {
                 ...state,
-                isLoading: action.payload
+                isLoading: false,
+                data: action.payload
             }
-    
+        case DirectoryActionTypes.GET_DIRECTORY_DATA_FAILURE:
+            return {
+                ...state,
+                isLoading: false,
+                errorMessage: action.payload
+            }
         default:
             return state;
     }

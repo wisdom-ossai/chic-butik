@@ -4,12 +4,12 @@ import './directory.component.scss';
 import MenuItemComponent from '../menu-item/menu-item.component';
 import { createStructuredSelector } from 'reselect';
 import { getDirectoryData } from '../../store/directory/directory.selectors';
-import { StartFetchDirectoryData } from '../../store/directory/directory.actions';
+import { LoadDirectoryData } from '../../store/directory/directory.actions';
 
 class DirectoryComponent extends React.Component {
 
   componentDidMount() {
-    this.props.dispatch(StartFetchDirectoryData());
+    this.props.dispatch(LoadDirectoryData());
   }
 
   render() {

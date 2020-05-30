@@ -3,18 +3,18 @@ import { DirectoryActionTypes } from './directory.actions';
 
 const directoryReducer = (state = InitialDirectoryState, action) => {
     switch (action.type) {
-        case DirectoryActionTypes.GET_DIRECTORY_DATA:
+        case DirectoryActionTypes.LOAD_DIRECTORY_DATA_START:
             return {
                 ...state,
                 isLoading: true
             }
-        case DirectoryActionTypes.GET_DIRECTORY_DATA_SUCCESS:
+        case DirectoryActionTypes.LOAD_DIRECTORY_DATA_SUCCESS:
             return {
                 ...state,
                 isLoading: false,
                 data: action.payload
             }
-        case DirectoryActionTypes.GET_DIRECTORY_DATA_FAILURE:
+        case DirectoryActionTypes.LOAD_DIRECTORY_DATA_FAILURE:
             return {
                 ...state,
                 isLoading: false,

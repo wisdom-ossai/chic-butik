@@ -3,20 +3,20 @@ import { ShopActionTypes } from "./shop.actions";
 
 export const shopReducer = (state = InitialShopState, action) => {
     switch (action.type) {
-        case ShopActionTypes.GET_SHOP_DATA:
+        case ShopActionTypes.LOAD_SHOP_DATA_START:
             return {
                 ...state,
                 isLoading: true
             }
         
-        case ShopActionTypes.GET_SHOP_DATA_SUCCESS:
+        case ShopActionTypes.LOAD_SHOP_DATA_SUCCESS:
             return {
                 ...state,
                 isLoading: false,
                 data: action.payload
             }
         
-        case ShopActionTypes.GET_SHOP_DATA_FAILURE:
+        case ShopActionTypes.LOAD_SHOP_DATA_FAILURE:
             return {
                 ...state,
                 isLoading: false,

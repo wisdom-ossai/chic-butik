@@ -8,14 +8,6 @@ export const getShopData = createSelector(
     shop => shop.data
 );
 
-export const isShopDataLoaded = createSelector(
-    getShopData,
-    data => {
-        console.log(!!data);
-        return !!data
-    }
-);
-
 export const isDataLoading = createSelector(
     getShopStore,
     shop => shop.isLoading
@@ -24,6 +16,14 @@ export const isDataLoading = createSelector(
 export const getErrorMessage = createSelector(
     getShopStore,
     shop => shop.errorMessage
+);
+
+export const isShopDataLoaded = createSelector(
+    getShopData,
+    data => {
+        console.log(!!data);
+        return !!data
+    }
 );
 
 export const getCollectionsForPreview = createSelector(

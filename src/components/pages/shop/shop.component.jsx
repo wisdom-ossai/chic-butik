@@ -1,7 +1,7 @@
 import React from 'react';
 import './shop.component.scss';
 import { Route } from 'react-router-dom';
-import { StartFetchShopData } from '../../../store/shop/shop.actions';
+import { LoadShopData } from '../../../store/shop/shop.actions';
 import CollectionsOverviewContainer from '../../collections-overview/collection-overview-container';
 import CollectionContainer from '../collection/collection-container';
 import { connect } from 'react-redux';
@@ -24,7 +24,7 @@ class ShopComponent extends React.Component {
 };
 
 const mapDispatchToProps = dispatch => ({
-    startFetchShopData: () => dispatch(StartFetchShopData())
+    startFetchShopData: () => dispatch(LoadShopData())
 })
 
 export default connect(null, mapDispatchToProps)(ShopComponent);

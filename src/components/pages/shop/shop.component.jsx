@@ -1,40 +1,30 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import './shop.component.scss';
-import CollectionsOverviewComponent from '../../collections-overview/collections-overview.component';
 import { Route } from 'react-router-dom';
-import CollectionComponent from '../collection/collection.component';
-import { createStructuredSelector } from 'reselect';
-import { isDataLoading, isShopDataLoaded } from '../../../store/shop/shop.selectors';
-import WithLoaderHOC from '../../with-loader/with-loader.component';
 import { StartFetchShopData } from '../../../store/shop/shop.actions';
-
-
-
-const CollectionComponentWithLoader = WithLoaderHOC(CollectionComponent);
-const CollectionsOverviewComponentWithLoader = WithLoaderHOC(CollectionsOverviewComponent);
+import CollectionsOverviewContainer from '../../collections-overview/collection-overview-container';
+import CollectionContainer from '../collection/collection-container';
+import { connect } from 'react-redux';
 
 class ShopComponent extends React.Component {
 
     componentDidMount() {
-        this.props.dispatch(StartFetchShopData());
+        this.props.startFetchShopData();
     }
 
     render() {
-        const { match, dataLoading, dataLoaded } = this.props
+        const { match } = this.props
         return (
             <div className="Shop">
-                <Route exact path={`${match.path}`} render={(props) => <CollectionsOverviewComponentWithLoader isLoading={!dataLoading} {...props} />} />
-                <Route path={`${match.path}/:collectionId`} render={(props) => <CollectionComponentWithLoader isLoading={!dataLoaded} {...props} />} />
+                <Route exact path={`${match.path}`} component={CollectionsOverviewContainer} />
+                <Route path={`${match.path}/:collectionId`} component={CollectionContainer} />
             </div>
         )
     }
 };
 
-
-const mapStateToProps = createStructuredSelector({
-    dataLoaded: isShopDataLoaded,
-    dataLoading: isDataLoading
+const mapDispatchToProps = dispatch => ({
+    startFetchShopData: () => dispatch(StartFetchShopData())
 })
 
-export default connect(mapStateToProps)(ShopComponent);
+export default connect(null, mapDispatchToProps)(ShopComponent);

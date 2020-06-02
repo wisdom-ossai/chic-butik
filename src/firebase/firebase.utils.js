@@ -82,8 +82,8 @@ export const convertDirectoriesSnapshotToMap = directoriesSnapshot => {
 firebase.initializeApp(config);
 const auth = firebase.auth();
 const firestore = firebase.firestore();
-const provider = new firebase.auth.GoogleAuthProvider();
-provider.setCustomParameters({ prompt: 'select_account' });
-const signInWithGoogle = () => auth.signInWithPopup(provider);
+const googleProvider = new firebase.auth.GoogleAuthProvider();
+googleProvider.setCustomParameters({ prompt: 'select_account' });
+const signInWithGoogle = () => auth.signInWithPopup(googleProvider);
 
-export { auth, firestore, signInWithGoogle, createUserProfileDocument , firebase as default};   
+export { auth, firestore, googleProvider, signInWithGoogle, createUserProfileDocument , firebase as default};   

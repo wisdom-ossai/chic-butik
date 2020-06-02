@@ -1,5 +1,6 @@
 const InitialUserState = {
-    currentUser: null
+    currentUser: null,
+    errorMessage: null
 }
 
 export default InitialUserState;

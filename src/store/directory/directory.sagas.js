@@ -1,4 +1,4 @@
-import { takeEvery, call, put } from 'redux-saga/effects';
+import { takeEvery, call, all, put } from 'redux-saga/effects';
 import { DirectoryActionTypes, LoadDirectoryDataFailure, LoadDirectoryDataSuccess } from './directory.actions';
 import { firestore, convertDirectoriesSnapshotToMap } from "../../firebase/firebase.utils";
 
@@ -13,7 +13,13 @@ export function* LoadDataAsync() {
     }
 };
 
-export function* SagaLoadDirectoryDataStart() {
+export function* LoadDirectoryDataStart() {
     yield takeEvery(DirectoryActionTypes.LOAD_DIRECTORY_DATA_START, LoadDataAsync)
 
+}
+
+export default function* directorySagas() {
+    yield all([
+        call(LoadDirectoryDataStart)
+    ])
 }
